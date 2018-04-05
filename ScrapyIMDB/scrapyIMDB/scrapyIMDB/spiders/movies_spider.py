@@ -7,16 +7,17 @@ class MoviesSpider(scrapy.Spider):
     '''
     name = "movie_list"
     #noted: one loaded page contains 50 movies
-    urlTemplate = "http://www.imdb.com/search/title?year={year},{year}&title_type=feature&sort=num_votes,desc"
+    urlTemplate = "http://www.imdb.com/search/title?year={year},{year}&title_type=feature&sort=num_votes,desc&page={page}&ref_=adv_nxt"
 
     def start_requests(self):
         self.crawlYears = getattr(self,'crawlYears',"2010").split(",")
 
         for year in self.crawlYears:
-            yield scrapy.Request(url=self.getUrl(year), callback=self.parse)
+            for j in range(1,100):
+                yield scrapy.Request(url=self.getUrl(year,pagenum = str(j) ), callback=self.parse)
 
-    def getUrl(self,year):
-        return self.urlTemplate.replace("{year}",year)
+    def getUrl(self,year,pagenum = 1):
+        return self.urlTemplate.replace("{year}",year).replace("{page}",pagenum)
 
     def parse(self, response):
         #noted: 50 contents per page!!
