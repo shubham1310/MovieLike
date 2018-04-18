@@ -30,6 +30,13 @@ class Searcher:
                         nametoid[row[-2]]=row[-1]
         self.nametoid =nametoid
 
+        title=[]
+        with open("../titles.dat", "r") as ins:
+            for line in ins:
+                title.append(line)
+        self.titles=title
+
+
     def search(self, request):
         """
         Accept a JSON request and run the provided query with the specified
@@ -53,6 +60,7 @@ class Searcher:
                 'score': float(result[1]),
                 'name': self.movies[int(result[0])],
                 'path' : self.nametoid[self.movies[int(result[0])].strip()],
+                'title': self.titles[int(result[0])],
                 # 'path': self.idx.doc_path(result[0])
             })
         response['elapsed_time'] = time.time() - start
