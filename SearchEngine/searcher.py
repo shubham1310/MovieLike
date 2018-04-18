@@ -15,7 +15,7 @@ class Searcher:
         """
         self.idx = metapy.index.make_inverted_index(cfg)
         self.default_ranker = metapy.index.OkapiBM25()
-        with open("/Users/samekshareddy/Desktop/TextInfo/metapy-demos-master/reviews/movienames.txt", "r") as ins:
+        with open("reviews/movienames.txt", "r") as ins:
             for line in ins:
                 self.movies.append(line)
 
