@@ -1,6 +1,6 @@
 import json
 import time
-
+import csv
 import metapy
 
 class Searcher:
@@ -18,6 +18,17 @@ class Searcher:
         with open("reviews/movienames.txt", "r") as ins:
             for line in ins:
                 self.movies.append(line)
+
+        nametoid={}
+        with open('../ScrapyIMDB/scrapyIMDB/data/movie_list.csv', 'r') as csvfile:
+            spamreader = csv.reader(csvfile)
+            for row in spamreader:
+                if unicode(row[-1][-1], 'utf-8').isnumeric():
+                    if row[0]=='' or not(row[0].replace('.','',1).isdigit()):
+                        pass
+                    else:
+                        nametoid[row[-2]]=row[-1]
+        self.nametoid =nametoid
 
     def search(self, request):
         """
@@ -37,10 +48,12 @@ class Searcher:
         for result in ranker.score(self.idx, query):
             print self.movies
             print int(result[0])
+            print ('http://www.imdb.com/title/' + self.nametoid[self.movies[int(result[0])].strip()])
             response['results'].append({
                 'score': float(result[1]),
                 'name': self.movies[int(result[0])],
-                'path': self.idx.doc_path(result[0])
+                'path' : self.nametoid[self.movies[int(result[0])].strip()],
+                # 'path': self.idx.doc_path(result[0])
             })
         response['elapsed_time'] = time.time() - start
         return json.dumps(response, indent=2)
