@@ -20,6 +20,9 @@ class Searcher:
                 self.movies.append(line)
 
         nametoid={}
+        nametorating={}
+        nametogenre={}
+        nametotime={}
         with open('../ScrapyIMDB/scrapyIMDB/data/movie_list.csv', 'r') as csvfile:
             spamreader = csv.reader(csvfile)
             for row in spamreader:
@@ -28,7 +31,14 @@ class Searcher:
                         pass
                     else:
                         nametoid[row[-2]]=row[-1]
+                        nametorating[row[-2]] = row[0]
+                        nametogenre[row[-2]] = row[1].replace(',',', ')
+                        nametotime[row[-2]] = row[2]
         self.nametoid =nametoid
+        self.nametorating = nametorating
+        self.nametogenre = nametogenre
+        self.nametotime = nametotime
+
 
         title=[]
         with open("../titles.dat", "r") as ins:
@@ -61,6 +71,9 @@ class Searcher:
                 'name': self.movies[int(result[0])],
                 'path' : self.nametoid[self.movies[int(result[0])].strip()],
                 'title': self.titles[int(result[0])],
+                'rating': self.nametorating[self.movies[int(result[0])].strip()],
+                'genre': self.nametogenre[self.movies[int(result[0])].strip()],
+                'time': self.nametotime[self.movies[int(result[0])].strip()],
                 # 'path': self.idx.doc_path(result[0])
             })
         response['elapsed_time'] = time.time() - start

@@ -55,6 +55,6 @@ print_results = (result) ->
     continue if (doc.path.includes ":") or (doc.path.length > 60)
     displayed += 1
     path = doc.path.replace(/_/g, " ")
-    html = "<li><h4><a href='http://www.imdb.com/title/#{doc.path}'><h2>#{doc.name}</h2><p>#{doc.title}</p></a>"
-    html += "<small class='pull-right'>#{doc.score.toFixed(4)}</small></h4></li>"
+    html = "<li><h4><a href='http://www.imdb.com/title/#{doc.path}' style='text-decoration : none' target='_blank'><h4>#{doc.name}</h4> <p style='font-size:16px'> <img src='./image/star.png' alt='Rating' style='width:30px;height:30px;'> #{doc.rating} &nbsp;| #{doc.time} <em style='float:right'> #{doc.genre}</em></br>#{doc.title}</p></a>"
+    html += "<small class='pull-right'>#{doc.score.toFixed(4)}</small></br></h4></li>"
     $("#search_results_list").append(html)
