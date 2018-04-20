@@ -74,6 +74,7 @@ class Searcher:
                 'rating': self.nametorating[self.movies[int(result[0])].strip()],
                 'genre': self.nametogenre[self.movies[int(result[0])].strip()],
                 'time': self.nametotime[self.movies[int(result[0])].strip()],
+                'namestrip' : self.movies[int(result[0])].replace(' ','').replace(':',''),
                 # 'path': self.idx.doc_path(result[0])
             })
         response['elapsed_time'] = time.time() - start
