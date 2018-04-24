@@ -10,8 +10,10 @@ sh ScrapyIMDB/scrapyIMDB/script/crawl_movie_list.sh 2017, 2016, 2015,2014,2013,2
 
 This will score the movie names and small details in a file in  ScrapyIMDB/scrapyIMDB/data/ called movie_list.csv
 
-To then get the movie reviews, we have to the run the ./crawler.ipynb file. This essentially gets all the reviews and some additional movie details as well like movie plot on main page, poster image etc.
-or can run
+To then get the movie reviews: 
+
+we have to the run the ./crawler.ipynb file. This essentially gets all the reviews and some additional movie details as well like movie plot on main page, poster image etc.
+
 
 ```bash
 python crawler.py
