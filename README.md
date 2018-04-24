@@ -15,6 +15,8 @@ To then get the movie reviews:
 we have to the run the ./crawler.ipynb file. This essentially gets all the reviews and some additional movie details as well like movie plot on main page, poster image etc.
 
 
+Or we can run this file directly
+
 ```bash
 python crawler.py
 ```
