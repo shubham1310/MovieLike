@@ -1,4 +1,4 @@
-#For the crawling part #
+# For the crawling part 
 
 Requirements:
 scrapy
@@ -20,4 +20,4 @@ python crawler.py
 The first part was taken from: https://github.com/vitid/ScrapyIMDB to get the movie names and was modified to get more movies as compared to the orignal numbers. The second part was written using Beautifulsoup and was written from scratch which does most of the work apart from high level movie information.
 
 
-#For the search engine part #
+# For the search engine part
