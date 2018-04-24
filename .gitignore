@@ -1,2 +1,3 @@
 SearchEngine/meta-pyenv*
 SearchEngine/idx*
+.ipynb_checkpoints/*
