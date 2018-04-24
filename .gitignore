@@ -1,3 +1,10 @@
 SearchEngine/meta-pyenv*
 SearchEngine/idx*
 .ipynb_checkpoints/*
+*.pyc
+*/*.pyc
+*/*/*.pyc
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+
