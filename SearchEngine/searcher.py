@@ -41,7 +41,7 @@ class Searcher:
 
 
         title=[]
-        with open("../titles.dat", "r") as ins:
+        with open("./reviews/titles.dat", "r") as ins:
             for line in ins:
                 title.append(line)
         self.titles=title
