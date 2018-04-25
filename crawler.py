@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 import numpy as np
@@ -22,13 +22,13 @@ headers.update(
 )
 
 
-# In[ ]:
+# In[2]:
 
 
 import csv
 ids=[]
 idstoname={}
-with open('./ScrapyIMDB/scrapyIMDB/data/movie_list.csv', 'r') as csvfile:
+with open('./ScrapyIMDB/data/movie_list.csv', 'r') as csvfile:
     spamreader = csv.reader(csvfile)
     for row in spamreader:
         if row[-1][-1].isnumeric():
