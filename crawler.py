@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
 
 
 import numpy as np
@@ -22,7 +22,7 @@ headers.update(
 )
 
 
-# In[2]:
+# In[ ]:
 
 
 import csv
@@ -42,12 +42,13 @@ with open('./ScrapyIMDB/data/movie_list.csv', 'r') as csvfile:
 # In[ ]:
 
 
+N=1000
 #This gets all the reviews for all the movies looks at different possible sorting methods (in sort)
 # ids=['tt2488496']
 reviewfile = open('./SearchEngine/reviews/reviews.dat','w')
 moviename= open('./SearchEngine/reviews/movienames.txt','w')
 count=0
-for k in ids[:1000]:
+for k in ids[:N]:
     print(count,k)
     count+=1
     url = 'http://www.imdb.com/title/'+str(k)+'/reviews'
@@ -61,6 +62,8 @@ for k in ids[:1000]:
             r = requests.get(url + i+j, headers=headers)
             soup = BeautifulSoup(r.text, 'html.parser')
             listing = soup.find(class_='lister')
+            if listing==None:
+                continue
             reviews = listing.find_all(class_='lister-item-content')
             for row in reviews:
                 if str(row.find(class_='display-name-date')).split('tt_urv">')[1].split('</')[0] in user:
@@ -99,7 +102,7 @@ moviename.close()
 # ids=['tt2488496']
 count=0
 title= open('./SearchEngine/reviews/titles.dat','w')
-for k in ids[:1000]:
+for k in ids[:N]:
     print(count,k)
     count+=1
     url = 'http://www.imdb.com/title/'+str(k)
@@ -118,7 +121,7 @@ title.close()
 
 #saves image posters of the movies 
 count=0
-for k in ids[:1000]:
+for k in ids[:N]:
     print(count,k)
     count+=1
     url = 'http://www.imdb.com/title/'+str(k)
