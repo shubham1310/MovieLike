@@ -5,10 +5,10 @@ scrapy
 
 To run the crawler to get the movie names:
 ```bash
-sh ./ScrapyIMDB/scrapyIMDB/script/crawl_movie_list.sh 2017, 2016, 2015,2014,2013,2012,2011,2010,2009,2008,2007
+sh ./ScrapyIMDB/script/crawl_movie_list.sh 2017, 2016, 2015,2014,2013,2012,2011,2010,2009,2008,2007
 ```
 
-This will score the movie names and small details in a file in  ScrapyIMDB/scrapyIMDB/data/ called movie_list.csv
+This will score the movie names and small details in a file in  ScrapyIMDB/data/ called movie_list.csv
 
 To then get the movie reviews: 
 

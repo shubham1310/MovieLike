@@ -23,7 +23,7 @@ class Searcher:
         nametorating={}
         nametogenre={}
         nametotime={}
-        with open('../ScrapyIMDB/scrapyIMDB/data/movie_list.csv', 'r') as csvfile:
+        with open('../ScrapyIMDB/data/movie_list.csv', 'r') as csvfile:
             spamreader = csv.reader(csvfile)
             for row in spamreader:
                 if unicode(row[-1][-1], 'utf-8').isnumeric():
