@@ -44,8 +44,8 @@ with open('./ScrapyIMDB/scrapyIMDB/data/movie_list.csv', 'r') as csvfile:
 
 #This gets all the reviews for all the movies looks at different possible sorting methods (in sort)
 # ids=['tt2488496']
-reviewfile = open('./reviews.dat','w')
-moviename= open('./moviename.dat','w')
+reviewfile = open('./SearchEngine/reviews/reviews.dat','w')
+moviename= open('./SearchEngine/reviews/movienames.txt','w')
 count=0
 for k in ids[:1000]:
     print(count,k)
@@ -97,7 +97,8 @@ moviename.close()
 
 #saves plot of the movies 
 # ids=['tt2488496']
-title= open('./titles.dat','w')
+count=0
+title= open('./SearchEngine/reviews/titles.dat','w')
 for k in ids[:1000]:
     print(count,k)
     count+=1
@@ -116,6 +117,7 @@ title.close()
 
 
 #saves image posters of the movies 
+count=0
 for k in ids[:1000]:
     print(count,k)
     count+=1
