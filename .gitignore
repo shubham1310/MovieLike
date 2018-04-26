@@ -7,4 +7,6 @@ SearchEngine/idx*
 .DS_Store
 */.DS_Store
 */*/.DS_Store
-
+*/*/.keep
+*/.keep
+*/*/*/.keep
