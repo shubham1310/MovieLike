@@ -2,6 +2,7 @@ import json
 import time
 import csv
 import metapy
+import operator
 
 class Searcher:
     """
@@ -52,20 +53,35 @@ class Searcher:
         Accept a JSON request and run the provided query with the specified
         ranker.
         """
-        start = time.time()
-        query = metapy.index.Document()
-        query.content(request['query'])
         ranker_id = request['ranker']
+        queries = request['query'].split(',');
         try:
             ranker = getattr(metapy.index, ranker_id)()
         except:
             print("Couldn't make '{}' ranker, using default.".format(ranker_id))
             ranker = self.default_ranker
-        response = {'query': request['query'], 'results': []} 
-        for result in ranker.score(self.idx, query):
-            print self.movies
-            print int(result[0])
-            print ('http://www.imdb.com/title/' + self.nametoid[self.movies[int(result[0])].strip()])
+
+        results = {}
+        for q in queries:
+
+            start = time.time()
+            query = metapy.index.Document()
+            query.content(q)
+            
+            response = {'query': request['query'], 'results': []} 
+        
+            for result in ranker.score(self.idx, query):
+                if results.has_key(result[0]):
+                    results[result[0]] += result[1];
+                else:
+                    results[result[0]] = result[1]
+
+        for k in results:
+            results[k] = results[k]/len(queries);
+
+        sorted_results = sorted(results.items(), key=operator.itemgetter(1))
+        for result in sorted_results:
+            # print ('http://www.imdb.com/title/' + self.nametoid[self.movies[int(result[0])].strip()])
             response['results'].append({
                 'score': float(result[1]),
                 'name': self.movies[int(result[0])],
