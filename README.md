@@ -26,3 +26,9 @@ The first part was taken from: https://github.com/vitid/ScrapyIMDB to get the mo
 
 
 # For the search engine part
+
+
+
+
+For the query expansion: 
+pip install vocabulary --user
