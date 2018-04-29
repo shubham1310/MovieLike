@@ -32,3 +32,6 @@ The first part was taken from: https://github.com/vitid/ScrapyIMDB to get the mo
 
 For the query expansion: 
 pip install vocabulary --user
+
+import nltk
+nltk.download('wordnet')
