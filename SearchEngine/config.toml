@@ -14,6 +14,5 @@ filter = "default-unigram-chain"
 [[analyzers]]
 method = "ngram-word"
 ngram = 2
-filter = [{type = "icu-tokenizer"}, {type = "ptb-normalizer"}]
-crf-prefix = "crf"
+filter = "default-chain"
 
