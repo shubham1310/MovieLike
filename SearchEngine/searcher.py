@@ -9,6 +9,7 @@ class Searcher:
     Wraps the MeTA search engine and its rankers.
     """
     movies = []
+    praiseWords = []
     def __init__(self, cfg):
         """
         Create/load a MeTA inverted index based on the provided config file and
@@ -47,6 +48,25 @@ class Searcher:
                 title.append(line)
         self.titles=title
 
+        c = [["acceptable", "decent", "honorable", "satisfactory"], ["amazing", "awesome", "excellent", "exceptional", "fantastic", "great", "super", "superb", "superior", "terrific", "remarkable", "marvelous", "splendid", "wonderful", "worthy", "genius", "premium", "stupendous",], ["good", "nice", "pleased", "pleasing"], ["admirable", "agreeable", "commendable", "favorable", "gratifying", "satisfying"]]
+        self.praiseWords = {}
+        for i in c:
+            for k in range(len(i)):
+                self.praiseWords[i[k]]=i[:k]+i[min(k+1,len(i)):]
+
+
+    def expandQuery(self,query):
+        newQuery = "";
+        # print self.praiseWords.keys()
+        for word in query.split(" "):
+            if word in self.praiseWords.keys():
+                for syn in self.praiseWords[word]:
+                    newQuery += syn + " ";
+
+            newQuery += word + " "
+
+        print newQuery;
+
 
     def search(self, request):
         """
@@ -66,6 +86,7 @@ class Searcher:
 
             start = time.time()
             query = metapy.index.Document()
+            self.expandQuery(q)
             query.content(q)
             
             response = {'query': request['query'], 'results': []} 
@@ -79,7 +100,7 @@ class Searcher:
         for k in results:
             results[k] = results[k]/len(queries);
 
-        sorted_results = sorted(results.items(), key=operator.itemgetter(1))
+        sorted_results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
         for result in sorted_results:
             # print ('http://www.imdb.com/title/' + self.nametoid[self.movies[int(result[0])].strip()])
             response['results'].append({
