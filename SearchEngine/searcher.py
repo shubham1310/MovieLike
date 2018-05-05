@@ -65,7 +65,7 @@ class Searcher:
 
             newQuery += word + " "
 
-        print newQuery;
+        return newQuery;
 
 
     def search(self, request):
@@ -86,8 +86,8 @@ class Searcher:
 
             start = time.time()
             query = metapy.index.Document()
-            self.expandQuery(q)
-            query.content(q)
+            exq = self.expandQuery(q)
+            query.content(exq)
             
             response = {'query': request['query'], 'results': []} 
         
