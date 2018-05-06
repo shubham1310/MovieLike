@@ -3,6 +3,10 @@
 Requirements:
 scrapy
 
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
+
 To run the crawler to get the movie names:
 ```bash
 cd ScrapyIMDB/script

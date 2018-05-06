@@ -20,11 +20,17 @@ headers.update(
         'From': 'shubham9@illinois.edu' 
     }
 )
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
+
+ps = PorterStemmer()
 
 
 # In[ ]:
 
 
+def removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
 import csv
 ids=[]
 idstoname={}
@@ -37,6 +43,7 @@ with open('./ScrapyIMDB/data/movie_list.csv', 'r') as csvfile:
             else:
                 ids.append(row[-1]) #ids for links in movies
                 idstoname[row[-1]]=row[-2] #name of the movie 
+ids = list(set(ids))
 
 
 # In[ ]:
@@ -89,7 +96,12 @@ for k in ids[:N]:
                 maintext+= title +' ' + text # + '\n' 
     maintext = maintext.replace("\n", " ")
     maintext = maintext.replace("  ", " ")
-    reviewfile.write("%s\n"%maintext)
+    maintext=removeNonAscii(maintext) 
+    words = word_tokenize(maintext) #stop word removal
+    line =""
+    for w in words:
+        line+=ps.stem(w) +" "
+    reviewfile.write("%s\n"%line)
     moviename.write("%s\n"%idstoname[k])
 reviewfile.close()
 moviename.close()
@@ -130,5 +142,21 @@ for k in ids[:N]:
     listing = soup.find(class_='poster')
     if not(listing==None):
         link = str(listing).split('src=')[1].split('"')[1]
-        urllib.request.urlretrieve(link, './SearchEngine/static/search/image/' + idstoname[k].replace(' ','').replace(':','')+".jpg")
+        urllib.request.urlretrieve(link, './SearchEngine/static/search/image/' + idstoname[k].replace(' ','').replace(':','').replace('/','')+".jpg")
+
+        
+
+
+# In[ ]:
+
+
+# b = removeNonAscii(b)
+# f = open('stemreview.dat','w')
+# for i in b.split('\n'):
+#     words = word_tokenize(i)
+#     line =""
+#     for w in words:
+#         # print(ps.stem(w))
+#         line+=ps.stem(w) +" "
+#     f.write(line +'\n')
 
