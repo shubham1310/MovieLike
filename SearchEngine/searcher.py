@@ -4,6 +4,10 @@ import csv
 import metapy
 import operator
 
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
+
 class Searcher:
     """
     Wraps the MeTA search engine and its rankers.
@@ -54,6 +58,8 @@ class Searcher:
             for k in range(len(i)):
                 self.praiseWords[i[k]]=i[:k]+i[min(k+1,len(i)):]
 
+        self.stemmer = PorterStemmer()
+
 
     def expandQuery(self,query):
         newQuery = "";
@@ -67,6 +73,16 @@ class Searcher:
 
         return newQuery;
 
+    def removeNonAscii(self,s): return "".join(i for i in s if ord(i)<128)
+
+    def stem(self,query):
+        q=self.removeNonAscii(query)
+        words = word_tokenize(q)
+        line =""
+        for w in words:
+            line+=self.stemmer.stem(w) +" "
+        return line
+        
 
     def search(self, request):
         """
@@ -87,6 +103,7 @@ class Searcher:
             start = time.time()
             query = metapy.index.Document()
             exq = self.expandQuery(q)
+            exq = self.stem(exq)
             query.content(exq)
             
             response = {'query': request['query'], 'results': []} 
