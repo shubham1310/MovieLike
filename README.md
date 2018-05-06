@@ -1,10 +1,10 @@
 # For the crawling part 
 
 Requirements:
-scrapy
-nltk
-nltk.stem.PorterStemmer
-nltk.tokenize.sent_tokenize, nltk.tokenize.word_tokenize
+scrapy<br>
+nltk<br>
+nltk.stem.PorterStemmer<br>
+nltk.tokenize.sent_tokenize, nltk.tokenize.word_tokenize<br>
 
 To run the crawler to get the movie names:
 ```bash
