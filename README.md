@@ -1,10 +1,8 @@
 # For the crawling part 
 
-Requirements:
+Requirements:<br>
 scrapy<br>
 nltk<br>
-nltk.stem.PorterStemmer<br>
-nltk.tokenize.sent_tokenize, nltk.tokenize.word_tokenize<br>
 
 To run the crawler to get the movie names:
 ```bash
@@ -16,7 +14,7 @@ This will score the movie names and small details in a file in  ScrapyIMDB/data/
 
 To then get the movie reviews: 
 
-we have to the run the ./crawler.ipynb file. This essentially gets all the reviews and some additional movie details as well like movie plot on main page, poster image etc.
+we have to the run the ./crawler.ipynb file. This essentially gets all the reviews (cleans the data by stemming etc) and some additional movie details as well like movie plot on main page, poster image etc.
 
 
 Or we can run this file directly
