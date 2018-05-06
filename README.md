@@ -2,10 +2,9 @@
 
 Requirements:
 scrapy
-
-import nltk
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
+nltk
+nltk.stem.PorterStemmer
+nltk.tokenize.sent_tokenize, nltk.tokenize.word_tokenize
 
 To run the crawler to get the movie names:
 ```bash
@@ -34,8 +33,8 @@ The first part was taken from: https://github.com/vitid/ScrapyIMDB to get the mo
 
 
 
-For the query expansion: 
-pip install vocabulary --user
+<!-- For the query expansion: 
+pip install vocabulary user
 
 import nltk
-nltk.download('wordnet')
+nltk.download('wordnet') -->
