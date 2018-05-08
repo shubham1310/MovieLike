@@ -8,9 +8,12 @@ virtualenv meta-pyenv
 source meta-pyenv/bin/activate
 pip install -r requirements.txt
 ```
+Run this to install punkt
 ```bash
 source meta-pyenv/bin/activate
 python
+```
+```bash
 import nltk
 nltk.download('punkt')
 ```
