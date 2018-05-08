@@ -28,8 +28,7 @@ The first part was taken from: https://github.com/vitid/ScrapyIMDB to get the mo
 
 # For the search engine part
 
-
-
+Follow the steps in the readme at https://github.com/shubham1310/imdbcrawler/tree/master/SearchEngine
 
 <!-- For the query expansion: 
 pip install vocabulary user
