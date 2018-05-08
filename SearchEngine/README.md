@@ -8,6 +8,12 @@ virtualenv meta-pyenv
 source meta-pyenv/bin/activate
 pip install -r requirements.txt
 ```
+```bash
+source meta-pyenv/bin/activate
+python
+import nltk
+nltk.download('punkt')
+```
 
 Make sure you run the `source` command before working with this project.
 Alternatively, you can add it to your `~/.bashrc`.
