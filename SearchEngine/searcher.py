@@ -103,19 +103,21 @@ class Searcher:
             start = time.time()
             query = metapy.index.Document()
             exq = self.expandQuery(q)
-            exq = self.stem(exq)
+            # exq = self.stem(exq)
             query.content(exq)
             
             response = {'query': request['query'], 'results': []} 
         
             for result in ranker.score(self.idx, query):
                 if results.has_key(result[0]):
-                    results[result[0]] += result[1];
+                    results[result[0]] *= result[1];
                 else:
                     results[result[0]] = result[1]
 
+
+
         for k in results:
-            results[k] = results[k]/len(queries);
+            results[k] = results[k]**(1.0/len(queries));
 
         sorted_results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
         for result in sorted_results:

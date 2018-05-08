@@ -29,8 +29,4 @@ To run the search engine server,
 python search_server.py config.toml
 ```
 
-To run the NLP demo server,
 
-```bash
-python nlp_server.py config.toml
-```
