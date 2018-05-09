@@ -3,6 +3,18 @@
 Requirements:<br>
 scrapy<br>
 nltk<br>
+nltk-punkt
+
+Run this to install punkt
+```bash
+source meta-pyenv/bin/activate
+python
+```
+and then inside python do this:
+```bash
+import nltk
+nltk.download('punkt')
+```
 
 To run the crawler to get the movie names:
 ```bash
