@@ -7,10 +7,12 @@ import coffeescript
 
 from searcher import Searcher
 
+# Default route page is index.html
 @app.route('/')
 def root():
     return app.send_static_file('index.html')
 
+# Search api called when the search button is clicked on indes.html
 @app.route('/search-api', methods=['POST'])
 def search_api():
     return app.searcher.search(request.get_json())
@@ -23,6 +25,8 @@ def compile_assets():
         js = coffeescript.compile_file(infile)
         f.write(js)
 
+
+# Start server
 def server(config):
     print('Compiling assets...')
     compile_assets()

@@ -14,6 +14,8 @@ class Searcher:
     """
     movies = []
     praiseWords = []
+
+    # the initialiser loads the movies, the plot and initialises the common praise word dictionary
     def __init__(self, cfg):
         """
         Create/load a MeTA inverted index based on the provided config file and
@@ -29,7 +31,7 @@ class Searcher:
         nametorating={}
         nametogenre={}
         nametotime={}
-        with open('../ScrapyIMDB/data/movie_list.csv', 'r') as csvfile:
+        with open('../Crawler/data/movie_list.csv', 'r') as csvfile:
             spamreader = csv.reader(csvfile)
             for row in spamreader:
                 if unicode(row[-1][-1], 'utf-8').isnumeric():
@@ -60,6 +62,7 @@ class Searcher:
 
         self.stemmer = PorterStemmer()
 
+    # Expands the query by replacing the common praise words with their synonyms
 
     def expandQuery(self,query):
         newQuery = "";
@@ -75,6 +78,8 @@ class Searcher:
 
     def removeNonAscii(self,s): return "".join(i for i in s if ord(i)<128)
 
+
+    # Stemming the query and dataset
     def stem(self,query):
         q=self.removeNonAscii(query)
         words = word_tokenize(q)
@@ -82,7 +87,8 @@ class Searcher:
         for w in words:
             line+=self.stemmer.stem(w) +" "
         return line
-        
+      
+    # Main search called by search_server.py which given query returns results 
 
     def search(self, request):
         """
@@ -98,6 +104,7 @@ class Searcher:
             ranker = self.default_ranker
 
         results = {}
+        # multiple preferences implemeted here
         for q in queries:
 
             start = time.time()
@@ -118,6 +125,8 @@ class Searcher:
 
         for k in results:
             results[k] = results[k]**(1.0/len(queries));
+
+        # results sorted and sent as a json response
 
         sorted_results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
         for result in sorted_results:
