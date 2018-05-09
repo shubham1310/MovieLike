@@ -97,11 +97,11 @@ for k in ids[:N]:
     maintext = maintext.replace("\n", " ")
     maintext = maintext.replace("  ", " ")
     maintext=removeNonAscii(maintext) 
-    words = word_tokenize(maintext) #stop word removal
-    line =""
-    for w in words:
-        line+=ps.stem(w) +" "
-    reviewfile.write("%s\n"%line)
+#     words = word_tokenize(maintext) #stop word removal
+#     line =""
+#     for w in words:
+#         line+=ps.stem(w) +" "
+    reviewfile.write("%s\n"%maintext)
     moviename.write("%s\n"%idstoname[k])
 reviewfile.close()
 moviename.close()
