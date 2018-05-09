@@ -34,7 +34,7 @@ def removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
 import csv
 ids=[]
 idstoname={}
-with open('./ScrapyIMDB/data/movie_list.csv', 'r') as csvfile:
+with open('./Crawler/data/movie_list.csv', 'r') as csvfile:
     spamreader = csv.reader(csvfile)
     for row in spamreader:
         if row[-1][-1].isnumeric():
