@@ -7,7 +7,6 @@ nltk-punkt
 
 Run this to install punkt
 ```bash
-source meta-pyenv/bin/activate
 python
 ```
 and then inside python do this:
